@@ -58,6 +58,7 @@ let hand=[],aiHand=[],pDeck=[],aiDeck=[],pBoard=[],aBoard=[],pRounds=0,aRounds=0
 const $=id=>document.getElementById(id);const rows=['melee','ranged','siege'];const rowNames={melee:'Nahkampf',ranged:'Fernkampf',siege:'Belagerung'};const rowIcons={melee:'⚔️',ranged:'🏹',siege:'🏰'};let difficulty='normal';
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function freshDeck(){return shuffle(baseCards.map((c,i)=>({...c,id:i+'-'+Math.random().toString(36).slice(2)})))}
+function setStatus(html){$('status').innerHTML=html}
 function startGame(){
  pDeck=freshDeck();aiDeck=freshDeck();hand=pDeck.splice(0,10);aiHand=aiDeck.splice(0,10);
  pBoard=[];aBoard=[];pRounds=0;aRounds=0;round=1;turn='player';pPassed=false;aPassed=false;gameOver=false;roundOver=false;weather=null;
