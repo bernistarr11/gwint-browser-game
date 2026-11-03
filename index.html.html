@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#10151d">
+<title>Gwint – Browser-Kartenspiel</title>
+<style>
+:root{--bg:#10151d;--panel:#1b2430;--panel2:#232f3d;--gold:#e4bd69;--cream:#f3ead7;--muted:#aab5c3;--red:#b95050;--blue:#5d9eb6;--green:#7ea17b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#273748 0,#10151d 62%);color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;border:0}header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #ffffff18;background:#0c1118d9;position:sticky;top:0;z-index:5}header .brand{font-weight:900;letter-spacing:.16em;color:var(--gold);font-size:1rem}header small{color:var(--muted)}main{max-width:900px;margin:auto;padding:12px;display:grid;gap:12px}.topline{display:flex;gap:8px;align-items:stretch}.scorebox{flex:1;background:#1a2430;border:1px solid #ffffff16;border-radius:14px;padding:10px;text-align:center}.scorebox .name{font-size:.78rem;color:var(--muted)}.scorebox .score{font-size:1.7rem;font-weight:900;line-height:1.2}.scorebox .rounds{font-size:.8rem;color:var(--gold)}.roundpill{display:grid;place-items:center;min-width:78px;border-radius:14px;background:#101720;border:1px solid #ffffff16;font-size:.75rem;color:var(--gold);text-align:center;padding:6px}.board{display:grid;gap:7px}.rowline{display:grid;grid-template-columns:68px 1fr;gap:7px;align-items:stretch}.rowlabel{border-radius:10px;background:#111923;border:1px solid #ffffff12;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5px;font-size:.72rem;color:var(--muted)}.rowlabel strong{font-size:1.1rem;color:var(--cream)}.slots{min-height:76px;border-radius:10px;background:#0b1119a8;border:1px solid #ffffff12;display:flex;gap:5px;padding:5px;overflow-x:auto;align-items:stretch}.card{position:relative;flex:0 0 76px;width:76px;height:94px;min-height:94px;min-width:76px;border-radius:8px;border:1px solid #d6c08a;background:linear-gradient(145deg,#344352,#18222c);padding:6px 5px;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;color:#f8efd9;box-shadow:0 2px 5px #0006;overflow:hidden;text-align:left}.card .power{font-weight:900;font-size:1.12rem;line-height:1;color:#f6ce76}.card .cname{font-size:.66rem;line-height:1.12;font-weight:750;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.card .type{font-size:.58rem;line-height:1.1;color:#bdcbd5;white-space:normal}.card .rowicon{font-size:.85rem;line-height:1;position:absolute;right:5px;top:5px;opacity:.95}.card.hero{background:linear-gradient(145deg,#795f32,#31291f);border-color:#f5d98c}.card.special{background:linear-gradient(145deg,#3e5864,#1d3038);border-color:#83c1ce}.card.spy{background:linear-gradient(145deg,#59446d,#261d35);border-color:#c5a4e8}.card.bond{background:linear-gradient(145deg,#345b4a,#1b3027);border-color:#8bd2a8}.ability{font-size:.56rem;line-height:1.05;color:#f5d98c;font-weight:800}.handwrap{background:#1a2430;border:1px solid #ffffff18;border-radius:16px;padding:10px}.handhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.handhead h2{font-size:.95rem;margin:0}.hint{font-size:.75rem;color:var(--muted)}.hand{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity}.hand .card{flex:0 0 84px;width:84px;height:116px;min-width:84px;min-height:116px;scroll-snap-align:start;cursor:pointer;transition:transform .12s,border-color .12s}.hand .card:active{transform:scale(.96)}.hand .card .cname{font-size:.73rem;line-height:1.12;padding-top:5px}.hand .card .type{font-size:.61rem}.hand .card .power{font-size:1.35rem}.hand .card:disabled{opacity:.35}.controls{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:10px;background:var(--gold);color:#1c1b17;font-weight:800}.btn.secondary{background:#293746;color:var(--cream);border:1px solid #ffffff1c}.btn.danger{background:#633737;color:#fff}.btn:disabled{opacity:.4;cursor:not-allowed}.difficulty{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--muted);font-size:.78rem;background:#111923;border:1px solid #ffffff18;border-radius:10px;padding:7px 9px}.difficulty select{background:#293746;color:var(--cream);border:1px solid #ffffff30;border-radius:7px;padding:6px;max-width:130px}.status{background:#111923;border:1px solid #ffffff16;border-radius:12px;padding:10px 12px;font-size:.88rem;line-height:1.4}.status strong{color:var(--gold)}.rules{color:var(--muted);font-size:.78rem;line-height:1.45}.overlay{position:fixed;inset:0;background:#070b10d9;z-index:10;display:none;align-items:center;justify-content:center;padding:22px}.modal{width:min(420px,100%);background:#1b2633;border:1px solid #d2b66b66;border-radius:18px;padding:22px;text-align:center;box-shadow:0 15px 60px #0008}.modal h2{color:var(--gold);margin:0 0 8px}.modal p{color:#d8dfdf;line-height:1.5}.modal .btn{width:100%;margin-top:8px}.weather{display:flex;align-items:center;gap:8px;color:#9fd1db;font-size:.75rem;padding:2px 0}.empty{color:#647482;font-size:.75rem;align-self:center}.tiny{font-size:.7rem;color:var(--muted)}@media(min-width:650px){main{padding:18px}.rowline{grid-template-columns:100px 1fr}.slots{min-height:104px}.card{flex:0 0 76px;width:76px;height:94px}.hand .card{flex:0 0 84px;width:84px;height:116px}}
+</style></head><body>
+<header><div><div class="brand">GWINT <span style="color:#f3ead7;font-weight:400;letter-spacing:.02em">/ TAVERN EDITION</span></div><small>Ein kostenloses Fan-inspiriertes Kartenspiel</small></div><button class="btn secondary" id="newgameTop">Neues Spiel</button></header>
+<main>
+<div class="topline"><div class="scorebox"><div class="name">DU</div><div class="score" id="playerScore">0</div><div class="rounds" id="playerRounds">Runden: 0</div></div><div class="roundpill"><div>RUNDE</div><strong id="roundNo" style="font-size:1.5rem">1</strong><div id="roundWins">Best of 3</div></div><div class="scorebox"><div class="name">COMPUTER</div><div class="score" id="aiScore">0</div><div class="rounds" id="aiRounds">Runden: 0</div><div class="hint">Hand: <strong id="aiHandCount">10</strong> Karten</div></div></div>
+<div class="status" id="status"><strong>Dein Zug.</strong> Wähle eine Karte aus deiner Hand, um sie auszuspielen.</div>
+<div class="board">
+ <div class="rowline"><div class="rowlabel"><strong id="aiMelee">0</strong>Nahkampf</div><div class="slots" id="ai-melee"><span class="empty">Noch keine Karten</span></div></div>
+ <div class="rowline"><div class="rowlabel"><strong id="aiRanged">0</strong>Fernkampf</div><div class="slots" id="ai-ranged"><span class="empty">Noch keine Karten</span></div></div>
+ <div class="rowline"><div class="rowlabel"><strong id="aiSiege">0</strong>Belagerung</div><div class="slots" id="ai-siege"><span class="empty">Noch keine Karten</span></div></div>
+ <div class="weather" id="weatherLine">☀️ Wetter: klar – keine Effekte aktiv</div>
+ <div class="rowline"><div class="rowlabel"><strong id="pMelee">0</strong>Nahkampf</div><div class="slots" id="p-melee"><span class="empty">Spiele eine Karte aus</span></div></div>
+ <div class="rowline"><div class="rowlabel"><strong id="pRanged">0</strong>Fernkampf</div><div class="slots" id="p-ranged"><span class="empty">Spiele eine Karte aus</span></div></div>
+ <div class="rowline"><div class="rowlabel"><strong id="pSiege">0</strong>Belagerung</div><div class="slots" id="p-siege"><span class="empty">Spiele eine Karte aus</span></div></div>
+</div>
+<div class="handwrap"><div class="handhead"><h2>Deine Hand</h2><span class="hint" id="handCount">10 Karten</span></div><div class="hand" id="hand"></div><div class="tiny">Tippe auf eine Karte, um sie auszuspielen. Du kannst stattdessen auch passen.</div></div>
+<div class="controls"><button class="btn" id="passBtn">Passen</button><button class="btn secondary" id="rulesBtn">Regeln</button><button class="btn secondary" id="restartBtn">Neu starten</button><label class="difficulty">KI-Schwierigkeit <select id="difficultySelect" aria-label="KI-Schwierigkeit"><option value="easy">Einfach</option><option value="normal" selected>Normal</option><option value="hard">Schwer</option></select></label></div>
+<div class="rules">Eigenständiger Fan-Prototyp mit klassischen Gwint-Grundideen: drei Reihen, Runden gewinnen durch höhere Gesamtstärke, zwei Rundensiege entscheiden das Spiel. Keine Werbung, kein Konto, keine In-App-Käufe.</div>
+</main>
+<div class="overlay" id="overlay"><div class="modal"><h2 id="modalTitle">Spiel beendet</h2><p id="modalText"></p><button class="btn" id="modalBtn">Weiter</button></div></div>
+<script>
+const baseCards=[
+{name:'Temerischer Infanterist',power:4,row:'melee',type:'Einheit'},
+{name:'Königlicher Späher',power:3,row:'ranged',type:'Einheit'},
+{name:'Belagerungsingenieur',power:5,row:'siege',type:'Einheit'},
+{name:'Grenzwache',power:2,row:'melee',type:'Einheit'},
+{name:'Armbrustschütze',power:5,row:'ranged',type:'Einheit'},
+{name:'Balliste',power:6,row:'siege',type:'Einheit'},
+{name:'Leichter Reiter',power:3,row:'melee',type:'Einheit'},
+{name:'Feldheilerin',power:4,row:'ranged',type:'Einheit'},
+{name:'Schildträger',power:4,row:'melee',type:'Einheit',ability:'bond',copy:1},
+{name:'Schildträger',power:4,row:'melee',type:'Einheit',ability:'bond',copy:2},
+{name:'Steinschleuder',power:4,row:'siege',type:'Einheit'},
+{name:'Veteran',power:6,row:'melee',type:'Einheit'},
+{name:'Kundschafter',power:2,row:'ranged',type:'Einheit'},
+{name:'Hauptmann',power:7,row:'melee',type:'Held'},
+{name:'Meisterschütze',power:8,row:'ranged',type:'Held'},
+{name:'Drachenjäger',power:9,row:'melee',type:'Held'},
+{name:'Kriegsmeister',power:10,row:'siege',type:'Held'},
+{name:'Sturmreiter',power:6,row:'melee',type:'Einheit'},
+{name:'Schwere Armbrust',power:7,row:'ranged',type:'Einheit'},
+{name:'Rammbock',power:8,row:'siege',type:'Einheit'},
+{name:'Späher',power:3,row:'ranged',type:'Einheit'},
+{name:'Waldläufer',power:5,row:'melee',type:'Einheit'},
+{name:'Pionier',power:4,row:'siege',type:'Einheit'},
+{name:'Klingenmeister',power:7,row:'melee',type:'Einheit'},
+{name:'Falkenschütze',power:6,row:'ranged',type:'Einheit'},
+{name:'Doppelagent',power:2,row:'ranged',type:'Spion',ability:'spy'},
+{name:'Geheimkurier',power:3,row:'melee',type:'Spion',ability:'spy'}
+];
+let hand=[],aiHand=[],pDeck=[],aiDeck=[],pBoard=[],aBoard=[],pRounds=0,aRounds=0,round=1,turn='player',pPassed=false,aPassed=false,gameOver=false,weather=null,roundOver=false;
+const $=id=>document.getElementById(id);const rows=['melee','ranged','siege'];const rowNames={melee:'Nahkampf',ranged:'Fernkampf',siege:'Belagerung'};const rowIcons={melee:'⚔️',ranged:'🏹',siege:'🏰'};let difficulty='normal';
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function freshDeck(){return shuffle(baseCards.map((c,i)=>({...c,id:i+'-'+Math.random().toString(36).slice(2)})))}
+function startGame(){
+ pDeck=freshDeck();aiDeck=freshDeck();hand=pDeck.splice(0,10);aiHand=aiDeck.splice(0,10);
+ pBoard=[];aBoard=[];pRounds=0;aRounds=0;round=1;turn='player';pPassed=false;aPassed=false;gameOver=false;roundOver=false;weather=null;
+ hideModal();setStatus('<strong>Dein Zug.</strong> Wähle eine Karte aus deiner Hand.');render()
+}
+function effectivePower(c,board){
+ let power=c.power;
+ if(c.ability==='bond' && board.filter(x=>x.ability==='bond'&&x.row===c.row).length>=2)power*=2;
+ if(c.type!=='Held'&&weather&&weather.row===c.row)power=Math.min(power,1);
+ return power
+}
+function score(board){return board.reduce((s,c)=>s+effectivePower(c,board),0)}
+function rowScore(board,row){return board.filter(c=>c.row===row).reduce((s,c)=>s+effectivePower(c,board),0)}
+function render(){
+ $('playerScore').textContent=score(pBoard);$('aiScore').textContent=score(aBoard);
+ $('playerRounds').textContent='Runden: '+pRounds;$('aiRounds').textContent='Runden: '+aRounds;
+ $('roundNo').textContent=round;$('roundWins').textContent=`${pRounds} : ${aRounds}`;
+ $('pMelee').textContent=rowScore(pBoard,'melee');$('pRanged').textContent=rowScore(pBoard,'ranged');$('pSiege').textContent=rowScore(pBoard,'siege');
+ $('aiMelee').textContent=rowScore(aBoard,'melee');$('aiRanged').textContent=rowScore(aBoard,'ranged');$('aiSiege').textContent=rowScore(aBoard,'siege');
+ for(const side of ['p','ai'])for(const r of rows){
+  const board=side==='p'?pBoard:aBoard;const el=$(`${side}-${r}`);el.innerHTML='';
+  const cards=board.filter(c=>c.row===r);
+  if(!cards.length){el.innerHTML='<span class="empty">Noch keine Karten</span>';continue}
+  cards.forEach(c=>el.appendChild(cardEl(c,false,board)))
+ }
+ $('weatherLine').textContent=weather?`🌫️ Wetter: ${rowNames[weather.row]} geschwächt (Einheiten auf Stärke 1)`:'☀️ Wetter: klar – keine Effekte aktiv';
+ $('handCount').textContent=hand.length+' Karten';$('aiHandCount').textContent=aiHand.length;
+ $('hand').innerHTML='';hand.forEach(c=>$('hand').appendChild(cardEl(c,true,hand)));
+ $('passBtn').disabled=gameOver||roundOver||pPassed||turn!=='player';
+}
+function cardEl(c,clickable,board){
+ const el=document.createElement('button');
+ el.className='card '+(c.type==='Held'?'hero ':'')+(c.type==='Spion'?'spy ':'')+(c.ability==='bond'?'bond':'');
+ el.type='button';
+ const power=board&&Array.isArray(board)?effectivePower(c,board):c.power;
+ let ability=c.ability==='spy'?'🕵️ Zieht 2':c.ability==='bond'?'🤝 Doppelt im Paar':c.type==='Held'?'★ Held':'Einheit';
+ el.innerHTML=`<span class="power">${power}</span><span class="rowicon" aria-label="${rowNames[c.row]}" title="${rowNames[c.row]}">${rowIcons[c.row]}</span><span class="cname">${c.name}</span><span class="ability">${ability}</span><span class="type">${rowNames[c.row]}</span>`;
+ if(!clickable)el.disabled=true;else{el.onclick=()=>playCard(c.id);el.title='Ausspielen: '+c.name}
+ return el
+}
+function drawCards(deck,target,count){
+ for(let i=0;i<count&&deck.length;i++)target.push(deck.shift())
+}
+function playCard(id){
+ if(turn!=='player'||pPassed||gameOver||roundOver)return;
+ const i=hand.findIndex(c=>c.id===id);if(i<0)return;
+ const c=hand.splice(i,1)[0];
+ if(c.ability==='spy'){
+  aBoard.push(c);drawCards(pDeck,hand,2);
+  setStatus(`<strong>${c.name}: Spion!</strong> Die Karte liegt beim Gegner. Du ziehst bis zu 2 Karten.`)
+ }else{
+  pBoard.push(c);setStatus(`<strong>Du spielst ${c.name}.</strong> Der Computer ist am Zug.`)
+ }
+ turn='ai';render();setTimeout(aiTurn,450)
+}
+function aiTurn(){
+ if(gameOver||roundOver)return;
+ if(!aPassed){
+  const total=score(aBoard),pt=score(pBoard);
+  const shouldPass=(pPassed&&total>=pt)||
+   (difficulty==='easy'&&total>=pt+2&&Math.random()<0.58)||
+   (difficulty==='normal'&&total>=pt+5&&Math.random()<0.72)||
+   (difficulty==='hard'&&total>=pt+4&&Math.random()<0.78);
+  if(shouldPass||aiHand.length===0){
+   aPassed=true;setStatus('<strong>Der Computer passt.</strong> Du kannst weiter ausspielen oder ebenfalls passen.')
+  }else{
+   let pool=[...aiHand];
+   if(difficulty==='easy')pool=pool.sort(()=>Math.random()-.5);
+   else if(difficulty==='normal')pool.sort((a,b)=>b.power-a.power);
+   else pool.sort((a,b)=>{
+    const av=a.power-(weather&&weather.row===a.row&&a.type!=='Held'?Math.max(0,a.power-1):0);
+    const bv=b.power-(weather&&weather.row===b.row&&b.type!=='Held'?Math.max(0,b.power-1):0);
+    return bv-av
+   });
+   const c=difficulty==='easy'?pool[0]:difficulty==='normal'?pool[Math.floor(Math.random()*Math.min(4,pool.length))]:pool[0];
+   const i=aiHand.findIndex(x=>x.id===c.id);if(i>=0)aiHand.splice(i,1);
+   if(c.ability==='spy'){
+    pBoard.push(c);drawCards(aiDeck,aiHand,2);
+    setStatus(`<strong>Der Computer spielt ${c.name} als Spion.</strong> Die Karte liegt bei dir; der Computer zieht bis zu 2 Karten.`)
+   }else{
+    aBoard.push(c);setStatus(`<strong>Der Computer spielt ${c.name}.</strong> Dein Zug.`)
+   }
+  }
+ }
+ if(pPassed&&!aPassed){turn='ai';render();setTimeout(aiTurn,450);return}
+ turn='player';render();if(pPassed&&aPassed)finishRound()
+}
+function pass(){
+ if(turn!=='player'||pPassed||gameOver||roundOver)return;
+ pPassed=true;setStatus('<strong>Du passt.</strong> Der Computer spielt seine Runde zu Ende.');
+ if(aPassed){finishRound();return}
+ turn='ai';render();setTimeout(aiTurn,450)
+}
+function finishRound(){if(roundOver||gameOver)return;roundOver=true;const ps=score(pBoard),as=score(aBoard);let msg;if(ps>as){pRounds++;msg=`Du gewinnst Runde ${round} mit ${ps} zu ${as}.`}else if(as>ps){aRounds++;msg=`Der Computer gewinnt Runde ${round} mit ${as} zu ${ps}.`}else{pRounds++;aRounds++;msg=`Unentschieden (${ps} zu ${as}) – beide erhalten einen Rundensieg.`}render();if(pRounds>=2||aRounds>=2){gameOver=true;const title=pRounds>aRounds?'Sieg!':aRounds>pRounds?'Niederlage':'Unentschieden';showModal(title,msg+' '+(pRounds>aRounds?'Du hast das Spiel gewonnen.':aRounds>pRounds?'Der Computer gewinnt das Spiel.':'Das Spiel endet unentschieden.'),'Nochmal spielen',startGame);setStatus('<strong>Spiel beendet.</strong> Starte ein neues Spiel, wenn du möchtest.')}else{showModal('Runde beendet',msg,'Nächste Runde',nextRound);setStatus('<strong>Runde beendet.</strong> Weiter zur nächsten Runde.') }}
+function nextRound(){hideModal();round++;pBoard=[];aBoard=[];pPassed=false;aPassed=false;roundOver=false;turn='player';weather=null;setStatus('<strong>Neue Runde.</strong> Wähle eine Karte aus deiner Hand.');render()}
+function showModal(title,text,button,action){$('modalTitle').textContent=title;$('modalText').textContent=text;$('modalBtn').textContent=button;$('modalBtn').onclick=action;$('overlay').style.display='flex'}function hideModal(){$('overlay').style.display='none'}
+function showRules(){showModal('Kurzregeln','Spiele Karten in Nahkampf, Fernkampf oder Belagerung. Wer zuerst zwei Runden gewinnt, gewinnt das Spiel. Spione liegen auf der gegnerischen Seite und ziehen bis zu 2 Karten. Die beiden Schildträger verdoppeln ihre Stärke, sobald sie gemeinsam in derselben Reihe liegen. Helden sind gegen Wettereffekte immun. Vereinfachter Fan-Prototyp.','Zurück',hideModal)}
+$('passBtn').onclick=pass;$('restartBtn').onclick=startGame;$('newgameTop').onclick=startGame;$('rulesBtn').onclick=showRules;$('difficultySelect').onchange=e=>{difficulty=e.target.value;setStatus('<strong>KI-Schwierigkeit geändert.</strong> Die neue Stufe gilt ab dem nächsten Computerzug.');};startGame();
+</script></body></html>
